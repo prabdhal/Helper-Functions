@@ -4,21 +4,25 @@ class Program
 {
     static void Main(string[] args)
     {
-        string name = "   [  Prabdeeddeep  = ]   ";
-        string replaceString = "eep";
-        string withString = "[replaced]";
-        string contains = "   [  P";
-        string startsWith = "   [  P";
-        string endsWith = "= ]   ";
-        Console.WriteLine("Trim(): [" + StringFunctions.Trim(name) + "]");
-        Console.WriteLine("TrimStart(): [" + StringFunctions.TrimStart(name) + "]");
-        Console.WriteLine("TrimEnd(): [" + StringFunctions.TrimEnd(name) + "]");
-        Console.WriteLine("Replace(): [" + StringFunctions.Replace(name, replaceString, withString) + "]" + " Answer: [" + name.Replace(replaceString, withString) + "]");
-        Console.WriteLine("All Caps: " + StringFunctions.ToUpper(name));
-        Console.WriteLine("All Small: " + StringFunctions.ToLower(name));
-        Console.WriteLine("Contains(): " + contains + " is " + StringFunctions.Contains(name, contains));
-        Console.WriteLine("StartsWith(): " + startsWith + " is " + StringFunctions.StartsWith(name, startsWith));
-        Console.WriteLine("EndsWith(): " + endsWith + " is " + StringFunctions.EndsWith(name, endsWith));
+        //string name = "   [  Prabdeeddeep  = ]   ";
+        //string replaceString = "eep";
+        //string withString = "[replaced]";
+        //string contains = "   [  P";
+        //string startsWith = "   [  P";
+        //string endsWith = "= ]   ";
+        int[] ary = { 3, 5, 6, 7, 10, 4, 2, 7 };
+
+        //Console.WriteLine("Trim(): [" + StringFunctions.Trim(name) + "]");
+        //Console.WriteLine("TrimStart(): [" + StringFunctions.TrimStart(name) + "]");
+        //Console.WriteLine("TrimEnd(): [" + StringFunctions.TrimEnd(name) + "]");
+        //Console.WriteLine("Replace(): [" + StringFunctions.Replace(name, replaceString, withString) + "]" + " Answer: [" + name.Replace(replaceString, withString) + "]");
+        //Console.WriteLine("All Caps: " + StringFunctions.ToUpper(name));
+        //Console.WriteLine("All Small: " + StringFunctions.ToLower(name));
+        //Console.WriteLine("Contains(): " + contains + " is " + StringFunctions.Contains(name, contains));
+        //Console.WriteLine("StartsWith(): " + startsWith + " is " + StringFunctions.StartsWith(name, startsWith));
+        //Console.WriteLine("EndsWith(): " + endsWith + " is " + StringFunctions.EndsWith(name, endsWith));
+        Console.WriteLine(MathInt.GetMinValue(ary));
+        Console.WriteLine(MathInt.GetMaxValue(ary));
     }
 }
 
@@ -437,3 +441,87 @@ public static class StringFunctions
     }
 }
 
+public static class MyInt32
+{
+    // Return the Max Value of Int32
+    public static int MaxValue()
+    {
+        int result = 0;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int counter = i;
+            int tempValue = 2;
+            if (i == 0) tempValue = 1;
+            
+            while (counter > 1)
+            {
+                tempValue *= 2;
+                counter--;
+            }
+
+            result += tempValue;
+        }
+
+        return result;
+    }
+
+    // Return the Min Value of Int32 
+    public static int MinValue()
+    {
+        int result = 0;
+
+        for (int i = 0; i > -31; i--)
+        {
+            int counter = -i;
+            int tempValue = -2;
+            if (i == 0) tempValue = -1;
+
+            while (counter > 1)
+            {
+                tempValue *= 2;
+                counter--;
+            }
+
+            result += tempValue;
+        }
+
+        return result;
+    }
+}
+
+static class MathInt
+{
+    // return the max int within an array 
+    public static int GetMaxValue(int[] ary)
+    {
+        int[] given = ary;
+        int result = MyInt32.MinValue();
+
+        for (int i = 0; i < given.Length; i++)
+        {
+            if (given[i] <= result) continue;
+
+            // set result to a greater number
+            result = given[i];
+        }
+
+        return result;
+    }
+
+    public static int GetMinValue(int[] ary)
+    {
+        int[] given = ary;
+        int result = MyInt32.MaxValue();
+
+        for (int i = 0; i < given.Length; i++)
+        {
+            if (given[i] >= result) continue;
+
+            // set result to a lower number
+            result = given[i];
+        }
+
+        return result;
+    }
+}
